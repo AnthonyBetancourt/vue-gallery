@@ -1,0 +1,276 @@
+//Import Reset CSS
+@import "reset"; // Import Google Font
+@import url('https://fonts.googleapis.com/css?family=Noto+Sans:400,400i,700,700i&display=swap'); // Setting Global SCSS variables
+$font-body: 'Noto Sans', sans-serif;
+$base-font-size: 18px;
+$small: 400px;
+
+:root {
+	// Global CSS Custom Properties for Spacing
+	//Can be used in Component Scoped SCSS
+	--small: 4px;
+	--medium: 8px;
+	--large: 16px;
+	--xlarge: 32px;
+	// Global CSS Custom Properties for Colors
+	//Can be used in Component Scoped SCSS
+	--white: #FFFFFF;
+	--black: #000000;
+	--primary: #027ABB;
+	--primary-dark: #005D8F;
+	--primary-light: #02A2F7;
+	--primary-extra-light: #68C9FD;
+	--secondary: #333333;
+	--tertiary: #DCDDDE;
+	--tertiary-dark: #898F90;
+	--tertiary-light: #F2F2F2;
+}
+
+body {
+	font-size: $base-font-size;
+	font-family: $font-body;
+	color: var(--secondary);
+}
+
+h1 {
+	font-family: $font-body;
+	font-size: 2rem;
+	font-weight: 700;
+	line-height: 1.8125rem;
+	color: var(--secondary);
+}
+
+label {
+	font-family: $font-body;
+	font-size: 1rem;
+	line-height: 1.625rem;
+	color: var(--secondary);
+	display: flex;
+}
+// Form Elements
+input,
+textarea {
+	font-family: $font-body;
+	background-color: var(--white);
+	border: 1px solid var(--tertiary-dark);
+	border-radius: 0;
+	color: var(--secondary);
+	display: block;
+	padding: 14px;
+	width: 100%;
+
+	&:focus {
+		outline: none;
+	}
+}
+
+input[type=checkbox] {
+	background: var(--white);
+	border-radius: 0;
+	margin: 0 var(--small) 0 0;
+	border: 1px solid var(--tertiary-dark);
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex: 0 0 24px;
+	width: 24px;
+	height: 24px;
+	position: relative;
+	vertical-align: middle;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+
+	&:checked:after {
+		content: url("../assets/checkmark.svg");
+	}
+}
+
+.button, button {
+	font-size: 16px;
+	width: 100%;
+	padding: 14px 30px;
+	cursor: pointer;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: background-color 0.25s;
+	transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+	&.button-save {
+		background-color: var(--primary);
+		border: 2px solid var(--primary);
+		color: var(--white);
+		&:hover {
+			background-color: var(--primary-dark);
+			border-color: var(--primary-dark);
+		}
+	}
+	&.button-cancel {
+		color: var(--primary);
+		background-color: var(--white);
+		border: 2px solid var(--primary);
+		&:hover {
+			color: var(--white);
+			background-color: var(--primary-dark);
+			border-color: var(--primary-dark);
+		}
+	}
+}
+
+.page-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.gallery-container {
+	flex: 1 1 auto;
+	max-width: 100%;
+	@media screen and (min-width: 1060px) {
+		max-width: 80%;
+	}
+	@media screen and (min-width: 1285px) {
+		max-width: 60%;
+	}
+	margin: 0 var(--large);
+	& > h1 {
+		margin: var(--xlarge) 0;
+		text-align: center;
+	}
+}
+
+.card-container {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+	gap: var(--xlarge);
+	.image-card {
+		cursor: pointer;
+
+		&-img {
+			width: 100%;
+			margin-bottom: var(--medium);
+		}
+
+		&-content {
+			font-family: $font-body;
+			font-size: 0.781rem;
+			letter-spacing: 0.15rem;
+			line-height: 19px;
+		}
+		&:only-child {
+			max-width: unset;
+			@media screen and (min-width: 426px) {
+				max-width: 188px;
+			}
+		}
+	}
+}
+
+.image-detail {
+	&-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translate(-50%, 0);
+		z-index: 999;
+		@media screen and (min-width: 426px) {
+			width: unset;
+		}
+	}
+
+	&-card {
+		background-color: var(--white);
+		padding: var(--xlarge);
+		position: relative;
+		width: 100%;
+		height: 100%;
+		@media screen and (min-width: 426px) {
+			width: unset;
+			height: unset;
+		}
+
+		& > h1 {
+			font-family: $font-body;
+			font-size: 1.35rem;
+			line-height: 1.8125rem;
+			font-weight: 400;
+			padding-bottom: var(--large);
+			margin-bottom: var(--xlarge);
+			border-bottom: 1px solid var(--tertiary);
+		}
+
+		& > div {
+			display: grid;
+			grid-template-columns: 50% 50%;
+			grid-template-areas: "label input";
+			margin-bottom: var(--large);
+		}
+
+		.image-description {
+			margin-bottom: var(--xlarge);
+		}
+
+		.image-properties {
+			grid-template-columns: 100%;
+			grid-template-areas: "label";
+			padding-bottom: var(--large);
+			border-bottom: 1px solid var(--tertiary);
+			span {
+				margin-right: var(--large);
+			}
+			& > div {
+				display: flex;
+				align-items: center;
+				margin-bottom: var(--large);
+				span {
+					font-family: $font-body;
+					font-size: 1rem;
+					color: var(--secondary);
+				}
+			}
+		}
+		.cta {
+			display: grid;
+			grid-template-areas: "left-content right-content";
+			gap: var(--large);
+			grid-template-columns: 50%;
+			margin-bottom: 0;
+		}
+	}
+}
+// Image Modal Styling
+.overlay {
+	display: block;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.85);
+	z-index: 99;
+	transition: all 0.25s ease;
+	cursor: pointer;
+}
+
+.hide {
+	display: none;
+}
+
+.close {
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding: var(--large);
+	cursor: pointer;
+	width: 50px;
+	height: 50px;
+	img {
+		width: 100%;
+	}
+}
